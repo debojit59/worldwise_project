@@ -1,8 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AppLayout from "./pages/AppLayout";
 import HomePage from "./pages/HomePage";
+import Login from "./pages/Login";
 import Pricing from "./pages/Pricing";
 import Product from "./pages/Product";
+
 function App() {
   return (
     <>
@@ -12,6 +14,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="pricing" element={<Pricing />} />
           <Route path="app" element={<AppLayout />} />
+          <Route path="login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </>
