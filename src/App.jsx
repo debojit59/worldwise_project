@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Citylist from "./components/CitiesList";
+import Countrylist from "./components/CountryList";
 import AppLayout from "./pages/AppLayout";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
@@ -29,6 +30,9 @@ function App() {
     FetchData();
   }, []);
 
+  const HandleDelete = (id) => {
+    setCities((city) => city.filter((city) => city.id !== id));
+  };
   return (
     <>
       <BrowserRouter>
@@ -39,13 +43,28 @@ function App() {
           <Route path="app" element={<AppLayout />}>
             <Route
               index
-              element={<Citylist cities={cities} isLoading={isLoading} />}
+              element={
+                <Citylist
+                  cities={cities}
+                  isLoading={isLoading}
+                  HandleDelete={HandleDelete}
+                />
+              }
             />
             <Route
               path="cities"
-              element={<Citylist cities={cities} isLoading={isLoading} />}
+              element={
+                <Citylist
+                  cities={cities}
+                  isLoading={isLoading}
+                  HandleDelete={HandleDelete}
+                />
+              }
             />
-            <Route path="countries" element={<p>List of countries</p>} />
+            <Route
+              path="countries"
+              element={<Countrylist cities={cities} isLoading={isLoading} />}
+            />
           </Route>
           <Route path="login" element={<Login />} />
         </Routes>
