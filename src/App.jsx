@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Citylist from "./components/CitiesList";
+import City from "./components/City";
 import Countrylist from "./components/CountryList";
 import AppLayout from "./pages/AppLayout";
 import HomePage from "./pages/HomePage";
@@ -40,7 +41,7 @@ function App() {
           <Route path="product" element={<Product />} />
           <Route path="/" element={<HomePage />} />
           <Route path="pricing" element={<Pricing />} />
-          <Route path="app" element={<AppLayout />}>
+          <Route path="app" element={<AppLayout cities={cities} />}>
             <Route
               index
               element={
@@ -61,6 +62,7 @@ function App() {
                 />
               }
             />
+            <Route path="cities/:id" element={<City />} />
             <Route
               path="countries"
               element={<Countrylist cities={cities} isLoading={isLoading} />}
