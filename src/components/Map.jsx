@@ -1,4 +1,4 @@
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import styles from "./Map.module.css";
 
 export default function Map({ cities }) {
@@ -8,10 +8,10 @@ export default function Map({ cities }) {
   const lat = searchParams.get("lat");
   const lng = searchParams.get("lng");
 
-  const city = cities.filter((city) => city.id === Number(id))[0];
-
+  const city = cities.find((city) => city.id === id);
+  const Navigate = useNavigate();
   return (
-    <div className={styles.mapContainer}>
+    <div className={styles.mapContainer} onClick={() => Navigate("form")}>
       {city ? (
         <>
           <h3>{city.country}</h3>

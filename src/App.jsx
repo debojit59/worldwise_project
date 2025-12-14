@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Citylist from "./components/CitiesList";
 import City from "./components/City";
 import Countrylist from "./components/CountryList";
+import From from "./components/Form";
 import AppLayout from "./pages/AppLayout";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
@@ -42,16 +43,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="pricing" element={<Pricing />} />
           <Route path="app" element={<AppLayout cities={cities} />}>
-            <Route
-              index
-              element={
-                <Citylist
-                  cities={cities}
-                  isLoading={isLoading}
-                  HandleDelete={HandleDelete}
-                />
-              }
-            />
+            <Route index element={<Navigate to="cities" replace />} />
             <Route
               path="cities"
               element={
@@ -67,6 +59,7 @@ function App() {
               path="countries"
               element={<Countrylist cities={cities} isLoading={isLoading} />}
             />
+            <Route path="form" element={<From />} />
           </Route>
           <Route path="login" element={<Login />} />
         </Routes>
