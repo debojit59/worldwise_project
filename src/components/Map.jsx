@@ -1,7 +1,9 @@
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { UseCities } from "../contexts/CityContext";
 import styles from "./Map.module.css";
 
-export default function Map({ cities }) {
+export default function Map() {
+  const { cities } = UseCities();
   const [searchParams, setSearchParams] = useSearchParams();
   const { id } = useParams();
 

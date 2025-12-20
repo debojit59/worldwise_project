@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import Twemoji from "react-twemoji";
+import { UseCities } from "../contexts/CityContext";
 import Styles from "./CityItem.module.css";
 
-export default function CityItems({ city, HandleDelete }) {
+export default function CityItems({ city }) {
+  const { HandleDelete } = UseCities;
   const formatDate = (date) =>
     new Intl.DateTimeFormat("en", {
       month: "long",
