@@ -1,8 +1,10 @@
+import { UseCities } from "../contexts/CityContext";
 import CountryItem from "./CountryItems";
 import styles from "./CountryList.module.css";
 import Spinner from "./Spinner";
 
-export default function Countrylist({ cities, isLoading }) {
+export default function Countrylist() {
+  const { cities, isLoading } = UseCities();
   if (isLoading) return <Spinner />;
 
   const Country = cities.reduce((arr, cur) => {
@@ -15,7 +17,7 @@ export default function Countrylist({ cities, isLoading }) {
   return (
     <ul className={styles.countryList}>
       {Country.map((country) => (
-        <CountryItem country={country} key={country.name} />
+        <CountryItem country={country} key={country.country} />
       ))}
     </ul>
   );
