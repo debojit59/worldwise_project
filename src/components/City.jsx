@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { UseCities } from "../contexts/CityContext";
 import Button from "./Button";
 import styles from "./City.module.css";
@@ -17,6 +17,7 @@ const formatDate = (date) =>
 function City() {
   const { currentCity, GetCity } = UseCities();
   const { id } = useParams();
+  const Navigate = useNavigate();
 
   useEffect(
     function () {
@@ -60,7 +61,7 @@ function City() {
       </div>
 
       <div>
-        <Button>Back</Button>
+        <Button onClick={() => Navigate(-1)}>Back</Button>
       </div>
     </div>
   );
