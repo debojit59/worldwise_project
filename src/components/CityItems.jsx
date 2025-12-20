@@ -4,7 +4,7 @@ import { UseCities } from "../contexts/CityContext";
 import Styles from "./CityItem.module.css";
 
 export default function CityItems({ city }) {
-  const { HandleDelete } = UseCities;
+  const { HandleDelete } = UseCities();
   const formatDate = (date) =>
     new Intl.DateTimeFormat("en", {
       month: "long",
