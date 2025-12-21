@@ -4,7 +4,7 @@ import { UseCities } from "../contexts/CityContext";
 import Styles from "./CityItem.module.css";
 
 export default function CityItems({ city }) {
-  const { HandleDelete } = UseCities();
+  const { HandleDelete, currentCity } = UseCities();
   const formatDate = (date) =>
     new Intl.DateTimeFormat("en", {
       month: "long",
@@ -13,10 +13,13 @@ export default function CityItems({ city }) {
     }).format(new Date(date));
 
   const { cityName, date, emoji, id, position } = city;
+
   return (
     <li>
       <Link
-        className={Styles.cityItem}
+        className={`${Styles.cityItem} ${
+          id === currentCity.id ? Styles["cityItem--active"] : ""
+        }`}
         to={`${id}?&lat=${position.lat}&lng=${position.lng}`}
       >
         <Twemoji className={Styles.twemoji}>

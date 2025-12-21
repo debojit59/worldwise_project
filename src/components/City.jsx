@@ -1,8 +1,10 @@
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import Twemoji from "react-twemoji";
 import { UseCities } from "../contexts/CityContext";
-import Button from "./Button";
+import BackButton from "./BackButton";
 import styles from "./City.module.css";
+import Spinner from "./Spinner";
 
 const BaseUrl = "http://localhost:9000";
 
@@ -15,9 +17,8 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function City() {
-  const { currentCity, GetCity } = UseCities();
+  const { currentCity, GetCity, isLoading } = UseCities();
   const { id } = useParams();
-  const Navigate = useNavigate();
 
   useEffect(
     function () {
@@ -28,12 +29,17 @@ function City() {
 
   const { cityName, emoji, date, notes } = currentCity;
 
+  if (isLoading) return <Spinner />;
+
   return (
     <div className={styles.city}>
       <div className={styles.row}>
         <h6>City name</h6>
         <h3>
-          <span>{emoji}</span> {cityName}
+          <Twemoji className="emoji">
+            <span>{emoji}</span>
+          </Twemoji>{" "}
+          {cityName}
         </h3>
       </div>
 
@@ -61,7 +67,7 @@ function City() {
       </div>
 
       <div>
-        <Button onClick={() => Navigate(-1)}>Back</Button>
+        <BackButton />
       </div>
     </div>
   );
