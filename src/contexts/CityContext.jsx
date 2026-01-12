@@ -52,7 +52,13 @@ function ContextProvider({ children }) {
 
   return (
     <CityContext.Provider
-      value={{ HandleDelete, cities, isLoading, currentCity, GetCity }}
+      value={{
+        HandleDelete,
+        cities,
+        isLoading,
+        currentCity,
+        GetCity,
+      }}
     >
       {children}
     </CityContext.Provider>
