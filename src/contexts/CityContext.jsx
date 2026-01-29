@@ -46,6 +46,24 @@ function ContextProvider({ children }) {
     }
   }
 
+  async function createCity(newCity) {
+    setIsLoading(true);
+    try {
+      const res = await fetch(`${BaseUrl}/cities`, {
+        method: "POST",
+        body: JSON.stringify(newCity),
+        headers: { "content-type": "application/json" },
+      });
+      const data = await res.json();
+
+      setCities((cities) => [...cities, data]);
+    } catch {
+      alert("Error Found");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   const HandleDelete = (id) => {
     setCities((city) => city.filter((city) => city.id !== id));
   };
@@ -58,6 +76,7 @@ function ContextProvider({ children }) {
         isLoading,
         currentCity,
         GetCity,
+        createCity,
       }}
     >
       {children}
@@ -69,7 +88,7 @@ function UseCities() {
   const context = useContext(CityContext);
   if (context === undefined) {
     throw new Error(
-      "context is being called from the outside parent components"
+      "context is being called from the outside parent components",
     );
   }
   return context;
